@@ -5,10 +5,6 @@ analyzer = SentimentIntensityAnalyzer()
 def analyze_sentiment(text):
     return analyzer.polarity_scores(text)
 
-def is_angry(scores, text):
-    lowered = text.lower()
-    anger_keywords = ["hate","dumbass", "dick", "idiot", "mad", "asshole", "worst", "annoying", "sucks","shit","fuck you","bastard"]
-    return any(word in lowered for word in anger_keywords)
 
 def is_possibly_sarcastic(scores, text):
     lowered = text.lower()
@@ -28,8 +24,6 @@ def detect_tone(text):
     scores = analyze_sentiment(text)
     tones = []
 
-    if is_angry(scores, text):
-        tones.append("angry")
     if is_possibly_sarcastic(scores, text):
         tones.append("possibly sarcastic")
 
